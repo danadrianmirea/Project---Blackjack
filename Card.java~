@@ -1,0 +1,18 @@
+public class Card {
+
+    int cardSuit;
+    int cardNumber;
+
+    public Card(int _cardSuit, int _cardNumber) {
+	cardSuit = _cardSuit;
+	cardNumber = _cardNumber;
+    }
+
+    public int getCardSuit() {
+	return cardSuit;
+    }
+
+    public int getCardNumber() {
+	return cardNumber;
+    }
+}

@@ -6,6 +6,10 @@ public class Game {
     deck.shuffleCard();
 
     System.out.println(deck.toString());
+
+    System.out.println(deck.popCard().toString());
+
+    System.out.println(deck.toString());
   }
 
   public static void main(String args[]) {

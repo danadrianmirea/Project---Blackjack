@@ -22,6 +22,10 @@ public class Deck {
     Collections.shuffle(cardList);
   }
 
+  public Card popCard() {
+    return cardList.pop();
+  }
+
   public String toString() {
 
     String str = "";

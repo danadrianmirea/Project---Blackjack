@@ -26,6 +26,10 @@ public class Deck {
     return cardList.pop();
   }
 
+  public int getDeckSize() {
+    return cardList.size();
+  }
+
   public String toString() {
 
     String str = "";

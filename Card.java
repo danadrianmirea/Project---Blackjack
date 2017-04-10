@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Card {
 
   int cardSuit, cardNumber;
@@ -29,9 +32,13 @@ public class Card {
     return cardNumber;
   }
 
-  public int[] getCount() {
+  public ArrayList<Integer> getCount() {
     if(cardNumber == 1)
-      return new
+      return new ArrayList<>(Arrays.asList(1, 11));
+    else if(cardNumber > 11)
+      return new ArrayList<>(10);
+    else
+      return new ArrayList<>(cardNumber);
   }
 
   public String toString() {

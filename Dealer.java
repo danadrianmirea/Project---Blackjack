@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+
 public class Dealer {
   
-  ArrayList<Integer> handCards = new ArrayList<Integer>();
+  ArrayList<card> handCards = new ArrayList<>();
   boolean isHit;
   boolean isBust;
   boolean isSoft;

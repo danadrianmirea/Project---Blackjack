@@ -1,13 +1,14 @@
 public class Game {
 
-  public static void PlayGame() {
+  float startingMoney = 0;
+
+  public static void PlayGame(int number) {
+    
     Deck deck = new Deck();
+    Card card;
 
+    //Shuffling
     deck.shuffleCard();
-
-    System.out.println(deck.toString());
-
-    System.out.println(deck.popCard().toString());
 
     System.out.println(deck.toString());
 
@@ -20,6 +21,6 @@ public class Game {
   }
 
   public static void main(String args[]) {
-    PlayGame();
+    PlayGame(1);
   }
 }

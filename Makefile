@@ -7,13 +7,14 @@ JFLAGS = -g
 
 default: classes
 
-MAIN: Game
+MAIN = Game
 
 CLASSES = \
 	Game.java \
 	Card.java \
 	Deck.java \
-	Counting.java
+	Counting.java \
+	Dealer.java
 
 Game.class: Game.java
 	$(JCC) $(JFLAGS) Game.java
@@ -26,6 +27,9 @@ Deck.class: Deck.java
 
 Counting.class: Counting.java
 	$(JCC) $(JFLAGS) Counting.java
+
+Dealer.class: Dealer.java
+	$(JCC) $(JFLAGS) Dealer.java
 
 classes: $(CLASSES:.java=.class)
 

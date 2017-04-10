@@ -29,6 +29,11 @@ public class Card {
     return cardNumber;
   }
 
+  public int[] getCount() {
+    if(cardNumber == 1)
+      return new
+  }
+
   public String toString() {
 
     String cardSuitStr = "", cardNumberStr = "";

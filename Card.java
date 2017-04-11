@@ -36,9 +36,9 @@ public class Card {
     if(cardNumber == 1)
       return new ArrayList<>(Arrays.asList(1, 11));
     else if(cardNumber > 11)
-      return new ArrayList<>(10);
+      return new ArrayList<>(Arrays.asList(10));
     else
-      return new ArrayList<>(cardNumber);
+      return new ArrayList<>(Arrays.asList(cardNumber));
   }
 
   public String toString() {

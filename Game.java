@@ -5,6 +5,7 @@ public class Game {
   public static void PlayGame(int number) {
     
     Deck deck = new Deck();
+    Dealer dealer = new Dealer();
     Card card;
 
     //Shuffling
@@ -15,7 +16,12 @@ public class Game {
     Counting HiLo = new Counting(0, "HiLo");
 
     while(deck.getDeckSize() > 0) {
-      HiLo.countCard(deck.popCard());
+
+      card = deck.popCard();
+      HiLo.countCard(card);
+      dealer.dealing(card);
+      dealer.getHand();
+
       System.out.println(HiLo.toString());
     }
   }

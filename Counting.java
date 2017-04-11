@@ -35,6 +35,8 @@ public class Counting {
       count++;
     else if(cardNumber > 9 || cardNumber == 1)
       count--;
+    if(count < 0)
+      count = 0;
   }
 
   //-------------------------------------------------------------

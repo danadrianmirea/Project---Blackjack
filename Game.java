@@ -19,8 +19,16 @@ public class Game {
 
       card = deck.popCard();
       HiLo.countCard(card);
-      dealer.dealing(card);
-      System.out.println(dealer.getHand());
+      if(dealer.getIsHit()) {
+        dealer.dealing(card);
+        System.out.println(dealer.getHand());
+      } else {
+        System.out.println(dealer.getHand());
+        dealer.clearHand();
+        System.out.println("Dealer Hand Clear");
+      }
+
+      
 
       System.out.println(HiLo.toString());
     }

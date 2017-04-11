@@ -6,16 +6,34 @@ public class Dealer {
   ArrayList<Card> handCards = new ArrayList<>();
   boolean isHit;
   boolean isBust;
-  boolean isSoft;
 
   public Dealer () {
     isHit = true;
     isBust = false;
-    isSoft = false;
+  }
+
+  public boolean getIsHit() {
+    return isHit;
+  }
+
+  public boolean getIsBust() {
+    return isBust;
   }
 
   public void dealing(Card card) {
     handCards.add(card);
+
+    ArrayList<Integer> counts = getHand();
+    for(int i = 0; i < counts.size(); i++) {
+      if (counts.get(i) >= 17 && counts.size() == 1) {
+        isHit = false;
+      }
+      else if (counts.get(i) > 21) {
+        System.out.println("Dealer Bust!");
+        isBust = true;
+        isHit = false;
+      }
+    }
   }
 
   public ArrayList<Integer> getHand() {
@@ -41,6 +59,12 @@ public class Dealer {
       }
     }
     return result;
+  }
+
+  public void clearHand() {
+    handCards = new ArrayList<>();
+    isHit = true;
+    isBust = false;
   }
 
   public String toString() {

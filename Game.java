@@ -20,7 +20,7 @@ public class Game {
       card = deck.popCard();
       HiLo.countCard(card);
       dealer.dealing(card);
-      dealer.getHand();
+      System.out.println(dealer.getHand());
 
       System.out.println(HiLo.toString());
     }

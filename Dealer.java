@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Dealer {
   
@@ -17,15 +18,29 @@ public class Dealer {
     handCards.add(card);
   }
 
-  public int getHand() {
+  public ArrayList<Integer> getHand() {
     
-    int result = 0;
+    ArrayList<Integer> result = new ArrayList<>(Arrays.asList());;
 
     for (int i = 0; i < handCards.size(); i++) {
       Card card = handCards.get(i);
-      System.out.println(card.getCount());
+      ArrayList<Integer> cardCount = card.getCount();
+      if (result.size() == 0)
+        result = (ArrayList<Integer>) cardCount.clone();
+      else {
+        ArrayList<Integer> preResult = (ArrayList<Integer>) result.clone();
+        for (int x = 0; x < cardCount.size(); x++) {
+          for (int y = 0; y < preResult.size(); y++) {
+            if (x == 0) {
+              result.set(y, result.get(y) + cardCount.get(0));
+            } else {
+              result.add(result.get(y) + cardCount.get(x));
+            }
+          }
+        }
+      }
     }
-    return 0;
+    return result;
   }
 
   public String toString() {

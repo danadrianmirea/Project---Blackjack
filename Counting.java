@@ -28,6 +28,7 @@ public class Counting {
   //-------------------------------------------------------------
   //Methods
 
+  //HiLo
   public void HiLo(Card card) {
     int cardNumber = card.cardNumber;
 

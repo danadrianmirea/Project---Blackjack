@@ -1,27 +1,37 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Dealer {
+public class Player {
   
   ArrayList<Card> handCards;
+  float money;
   boolean isHit;
   boolean isBust;
 
-  public Dealer () {
+  public Player(float startMoney) {
     handCards = new ArrayList<>();
+    money = startMoney;
     isHit = true;
     isBust = false;
+  }
+
+  public float getMoney() {
+    return money;
+  }
+
+  public void betMoney(float _money) {
+    money -= _money;
   }
 
   public boolean getIsHit() {
     return isHit;
   }
 
-  public boolean getIsBust() {
-    return isBust;
+  public void setHit(boolean _isHit) {
+    isHit = _isHit;
   }
 
-  public void dealing(Card card) {
+  public void playing(Card card) {
     handCards.add(card);
 
     ArrayList<Integer> counts = getHand();
@@ -30,7 +40,7 @@ public class Dealer {
         isHit = false;
       }
       else if (counts.get(i) > 21) {
-        System.out.println("Dealer Bust!");
+        System.out.println("Player Bust!");
         isBust = true;
         isHit = false;
       }
@@ -69,16 +79,12 @@ public class Dealer {
   }
 
   public String toString() {
-    if(isBust)
-      return "Dealer: Bust";
-    else {
-      String text = "Dealer: ";
-      text += "Hand Cards: ";
-      for (int i = 0; i < handCards.size(); i++) {
-        text += (handCards.get(i).toString() + " ");
-      }
-      text += ("|| Hand: " + getHand());
-      return text;
+    String text = "Player: ";
+    text += "Hand Cards: ";
+    for (int i = 0; i < handCards.size(); i++) {
+      text += (handCards.get(i).toString() + " ");
     }
+    text += (" || Hand: " + getHand());
+    return text;
   }
 }

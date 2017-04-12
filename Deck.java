@@ -7,18 +7,19 @@ public class Deck {
 
   LinkedList<Card> cardList = new LinkedList<Card>();
 
-  public Deck() {
-
-    for(int i = 0; i < 4; i++) {
-      for(int j = 1; j < 14; j++) {
-        Card card = new Card(i, j);
-        cardList.add(card);
+  public Deck(int deckNumber) {
+    while (deckNumber > 0) {
+      for(int i = 0; i < 4; i++) {
+        for(int j = 1; j < 14; j++) {
+          Card card = new Card(i, j);
+          cardList.add(card);
+        }
       }
+      deckNumber--;
     }
   }
 
   public void shuffleCard() {
-
     Collections.shuffle(cardList);
   }
 

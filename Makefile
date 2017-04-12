@@ -14,7 +14,8 @@ CLASSES = \
 	Card.java \
 	Deck.java \
 	Counting.java \
-	Dealer.java
+	Dealer.java \
+	Player.java
 
 Game.class: Game.java
 	$(JCC) $(JFLAGS) Game.java
@@ -31,9 +32,12 @@ Counting.class: Counting.java
 Dealer.class: Dealer.java
 	$(JCC) $(JFLAGS) Dealer.java
 
+Player.class: Player.java
+	$(JCC) $(JFLAGS) Player.java
+
 classes: $(CLASSES:.java=.class)
 
-test: classes $(MAIN).class
+test: Card.class Deck.class Counting.class Dealer.class Player.class classes $(MAIN).class
 	$(JVM) $(MAIN)
 
 clean:

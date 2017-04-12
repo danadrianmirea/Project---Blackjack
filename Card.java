@@ -35,7 +35,7 @@ public class Card {
   public ArrayList<Integer> getCount() {
     if(cardNumber == 1)
       return new ArrayList<>(Arrays.asList(1, 11));
-    else if(cardNumber > 11)
+    else if(cardNumber > 10)
       return new ArrayList<>(Arrays.asList(10));
     else
       return new ArrayList<>(Arrays.asList(cardNumber));

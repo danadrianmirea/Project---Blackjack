@@ -35,16 +35,37 @@ public class Player {
     handCards.add(card);
 
     ArrayList<Integer> counts = getHand();
-    for(int i = 0; i < counts.size(); i++) {
-      if (counts.get(i) >= 17 && counts.size() == 1) {
+
+    if(isAllHigher(counts, 21)) {
+      isBust = true;
+      isHit = false;
+    } else {
+      if (isAnyHigher(counts, 17)) {
         isHit = false;
-      }
-      else if (counts.get(i) > 21) {
-        System.out.println("Player Bust!");
-        isBust = true;
-        isHit = false;
+      } else {
+        if (counts.contains(17)) {
+          if(counts.size() != 2) {
+            isHit = false;
+          }
+        }
       }
     }
+  }
+
+  public static boolean isAllHigher(ArrayList<Integer> array, int num) {
+    for (int i = 0; i < array.size(); i++) {
+      if(array.get(i) <= num)
+        return false;
+    }
+    return true;
+  }
+
+  public static boolean isAnyHigher(ArrayList<Integer> array, int num) {
+    for (int i = 0; i < array.size(); i++) {
+      if(array.get(i) > num)
+        return true;
+    }
+    return false;
   }
 
   public ArrayList<Integer> getHand() {
@@ -85,6 +106,8 @@ public class Player {
       text += (handCards.get(i).toString() + " ");
     }
     text += (" || Hand: " + getHand());
+    if(isBust)
+      return text + "\n" + "Player Bust";
     return text;
   }
 }

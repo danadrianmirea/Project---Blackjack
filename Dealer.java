@@ -23,11 +23,15 @@ public class Dealer {
     return isHit;
   }
 
+  public void setIsHit(boolean _isHit) {
+    isHit = _isHit;
+  }
+
   public boolean getIsBust() {
     return isBust;
   }
 
-  public void dealing(Card card) {
+  public int dealing(Card card) {
     handCards.add(card);
 
     ArrayList<Integer> counts = getHand();
@@ -36,7 +40,7 @@ public class Dealer {
       isBust = true;
       isHit = false;
     } else {
-      if (isAnyHigher(counts, 17)) {
+      if (isAnyBetween(counts, 17, 22)) {
         isHit = false;
       } else {
         if (counts.contains(17)) {
@@ -46,6 +50,7 @@ public class Dealer {
         }
       }
     }
+    return getClosestLess(counts, 22);
   }
 
   public static boolean isAllHigher(ArrayList<Integer> array, int num) {
@@ -56,12 +61,24 @@ public class Dealer {
     return true;
   }
 
-  public static boolean isAnyHigher(ArrayList<Integer> array, int num) {
+  public static boolean isAnyBetween(ArrayList<Integer> array, int num1, int num2) {
     for (int i = 0; i < array.size(); i++) {
-      if(array.get(i) > num)
+      int num = array.get(i);
+      if(num > num1 && num < num2)
         return true;
     }
     return false;
+  }
+
+  public static int getClosestLess(ArrayList<Integer> array, int num) {
+    int result = 0;
+
+    for (int i = 0; i < array.size(); i++) {
+      int currNum = array.get(i);
+      if(currNum > result && currNum < num)
+        result = currNum;
+    }
+    return result;
   }
 
   public ArrayList<Integer> getHand() {

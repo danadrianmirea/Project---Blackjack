@@ -16,7 +16,7 @@ public class Game {
     int dealerCount = 0, playerCount = 0;
     Counting counting = new Counting(0, countingMethod);
 
-    int numPlayerWin = 0, numDealerWin = 0, numPush = 0;
+    int numTotalGame = 0, numPlayerWin = 0, numDealerWin = 0, numPush = 0;
 
     //Shuffling
     deck.shuffleCard();
@@ -94,14 +94,17 @@ public class Game {
         System.out.println("Player Hand Clear");
       }
 
+      numTotalGame++;
+
       System.out.println("\n\n");
     }
     System.out.println("Game Finished");
-    return new int[]{numPlayerWin, numDealerWin, numPush};
+    return new int[]{numTotalGame, numPlayerWin, numDealerWin, numPush};
   }
 
   public static void main(String args[]) {
 
+    int numTotalGame = 0;
     int numPlayerWin = 0;
     int numDealerWin = 0;
     int numPush = 0;
@@ -112,12 +115,14 @@ public class Game {
 
     for(int i = 0; i < numGame; i++) {
       result = PlayGame("HiLo");
-      numPlayerWin += result[0];
-      numDealerWin += result[1];
-      numPush += result[2];
+      numTotalGame += result[0];
+      numPlayerWin += result[1];
+      numDealerWin += result[2];
+      numPush += result[3];
     }
 
     System.out.println("Final Result\n");
+    System.out.println("Total Game: \t" + numTotalGame);
     System.out.println("Player Win: \t" + numPlayerWin);
     System.out.println("Dealer Win: \t" + numDealerWin);
     System.out.println("Push: \t\t" + numPush);

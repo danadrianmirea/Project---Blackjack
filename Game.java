@@ -1,3 +1,9 @@
+//-----------------------------------------
+//
+// Game.java
+//
+//-----------------------------------------
+
 public class Game {
 
   float startingMoney = 0;
@@ -38,7 +44,7 @@ public class Game {
         player.playing(card2); 
         System.out.println(player.toString());
       }
-      
+
       System.out.println(counting.toString());
       System.out.println("Initialize the game");
       //----------------------------------------------------

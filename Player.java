@@ -13,12 +13,14 @@ public class Player {
   float money;
   boolean isHit;
   boolean isBust;
+  boolean is21;
 
   public Player(float startMoney) {
     handCards = new ArrayList<>();
     money = startMoney;
     isHit = true;
     isBust = false;
+    is21 = false;
   }
 
   public float getMoney() {
@@ -27,6 +29,10 @@ public class Player {
 
   public void betMoney(float _money) {
     money -= _money;
+  }
+
+  public void addMoney(float _money) {
+    money += _money;
   }
 
   public boolean getIsHit() {
@@ -39,6 +45,10 @@ public class Player {
 
   public boolean getIsBust() {
     return isBust;
+  }
+
+  public boolean getIs21() {
+    return is21;
   }
 
   public int playing(Card card) {
@@ -60,6 +70,13 @@ public class Player {
         }
       }
     }
+
+    //----------------------------------------------------
+    // Check 21 at once
+    if(counts.contains(21) && handCards.size() == 2) {
+      is21 = true;
+    }
+    //----------------------------------------------------
     return getClosestLess(counts, 22);
   }
 
@@ -120,6 +137,7 @@ public class Player {
     handCards = new ArrayList<>();
     isHit = true;
     isBust = false;
+    is21 = false;
   }
 
   public String toString() {

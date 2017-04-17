@@ -23,6 +23,7 @@ public class Game {
     // 6      Number Of Player Win With Dealer Bust
     // 7      Number Of Dealer Win With High Count
     // 8      Number Of Dealer Win With Player Bust
+    // 9      Money Of Player Left
     //----------------------------------------------------
 
     Deck deck = new Deck(6);

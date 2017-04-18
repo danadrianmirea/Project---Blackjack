@@ -95,13 +95,13 @@ public class Game {
 
       //----------------------------------------------------
       // Double or not
-      ArrayList<Integer> dealerHand = dealer.getHand();
-      if(dealerHand.size() == 2 || dealerHand.get(0) == 10) {
+      /*ArrayList<Integer> dealerHand = dealer.getHand();
+      if(!(dealerHand.size() == 2 || dealerHand.get(0) == 10) && counting.getCount() >= minCount) {
         if(player.getMoney() >= bettingMoney) {
           bettingMoney += bettingMoney;
           player.betMoney(bettingMoney);
         }
-      }
+      }*/
       //----------------------------------------------------
 
       if(player.getIs21()) {

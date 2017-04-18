@@ -4,6 +4,8 @@
 //
 //-----------------------------------------
 
+import java.util.ArrayList;
+
 public class Game {
 
   float startingMoney = 0;
@@ -88,6 +90,17 @@ public class Game {
         playerCount = player.playing(card1);
         playerCount = player.playing(card2); 
         System.out.print(player.toString() + " ");
+      }
+      //----------------------------------------------------
+
+      //----------------------------------------------------
+      // Double or not
+      ArrayList<Integer> dealerHand = dealer.getHand();
+      if(dealerHand.size() == 2 || dealerHand.get(0) == 10) {
+        if(player.getMoney() >= bettingMoney) {
+          bettingMoney += bettingMoney;
+          player.betMoney(bettingMoney);
+        }
       }
       //----------------------------------------------------
 

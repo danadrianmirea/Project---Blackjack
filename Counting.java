@@ -14,9 +14,8 @@ public class Counting {
     method = _method;
   }
 
-  public void countCard(Card card) {
-    if (method.equals("HiLo"))
-      HiLo(card);
+  public int getCount() {
+    return count;
   }
 
   public void setMethod(String newMethod) {
@@ -25,6 +24,11 @@ public class Counting {
 
   public String getMethod() {
     return method;
+  }
+
+  public void countCard(Card card) {
+    if (method.equals("HiLo"))
+      HiLo(card);
   }
 
   public String toString() {

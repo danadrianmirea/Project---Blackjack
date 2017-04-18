@@ -95,9 +95,9 @@ public class Dealer {
         for (int x = 0; x < cardCount.size(); x++) {
           for (int y = 0; y < preResult.size(); y++) {
             if (x == 0) {
-              result.set(y, result.get(y) + cardCount.get(0));
+              result.set(y, preResult.get(y) + cardCount.get(0));
             } else {
-              result.add(result.get(y) + cardCount.get(x));
+              result.add(preResult.get(y) + cardCount.get(x));
             }
           }
         }

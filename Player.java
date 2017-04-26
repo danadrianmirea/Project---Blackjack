@@ -39,7 +39,7 @@ public class Player {
     return isHit;
   }
 
-  public void setHit(boolean _isHit) {
+  public void setIsHit(boolean _isHit) {
     isHit = _isHit;
   }
 

@@ -60,7 +60,7 @@ public class Game {
       if(counting.getCount() >= minCount) {
         bettingMoney = bettingWinMoney;
       } else {
-        bettingMoney = bettingLoseMoney;
+        bettingMoney = bettingWinMoney;
       }
 
       if(player.getMoney() < bettingMoney) {
@@ -94,7 +94,7 @@ public class Game {
       //----------------------------------------------------
 
       //----------------------------------------------------
-      // Double or not
+      // Double Method
       /*ArrayList<Integer> dealerHand = dealer.getHand();
       if(!(dealerHand.size() == 2 || dealerHand.get(0) == 10) && counting.getCount() >= minCount) {
         if(player.getMoney() >= bettingMoney) {
@@ -112,6 +112,13 @@ public class Game {
 
       } else {
         while(player.getIsHit()) {
+          //------------------------------
+          //Counting exception
+          if(counting.getCount() >= minCount) {
+            player.setIsHit(false);
+            break;
+          }
+          //------------------------------
           Card card = deck.popCard();
           counting.countCard(card);
           playerCount = player.playing(card);
@@ -254,7 +261,7 @@ public class Game {
       }
 
       System.out.println("Result " + num);
-      System.out.println("Total Game\tPlayer Win\tDealer Win\tPush\tPlayer Winning Type:\tHigh Count:\t Dealer Bust:\t 21:\tDealer Winning Type:\tHigh Count:\tPlayer Bust:\tMoney:\tMax Money:");
+      System.out.println("Total Game\tPlayer Win\tDealer Win\tPush\tPlayer Winning Type:\tHigh Count:\t Dealer Bust:\t 21:\tDealer Winning Type:\t\t\tHigh Count:\tPlayer Bust:\tMoney:\tMax Money:");
       
       for(int i = 0; i < numberOfStat; i++) {
         System.out.println(Integer.toString((int)result[i][0]) + "\t\t" + Integer.toString((int)result[i][1]) + "\t\t" + Integer.toString((int)result[i][2]) + "\t\t" + Integer.toString((int)result[i][3]) + "\t\t\t\t" + Integer.toString((int)result[i][4]) + "\t\t" + Integer.toString((int)result[i][5]) + "\t\t" + Integer.toString((int)result[i][6]) + "\t\t\t\t" + Integer.toString((int)result[i][7]) + "\t\t" + Integer.toString((int)result[i][8]) + "\t\t" + String.format("%.2f", result[i][9]) + "\t" + String.format("%.2f", result[i][10]));

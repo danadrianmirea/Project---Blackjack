@@ -40,13 +40,15 @@ public class Game {
     int numDealerWinWithHighCount = 0, numDealerWinWithPlayerBust = 0;
 
     int minCount = _minCount;
-    int bettingWinRate = 10, bettingLoseRate = 10;
+    int bettingWinRate = 10, bettingLoseRate = 100;
 
     float maxMoney = _maxMoney;
 
     float bettingMoney = 0;
     float bettingWinMoney = _money / bettingWinRate;
     float bettingLoseMoney = _money / bettingWinRate / bettingLoseRate;
+
+    boolean isPlaying = false;
 
     //Shuffling
     deck.shuffleCard();
@@ -56,18 +58,32 @@ public class Game {
     while(deck.getDeckSize() > 12) {
 
       //----------------------------------------------------
+      //Playing Status
+      if(!isPlaying) {
+        if(counting.getCount() >= minCount) {
+          isPlaying = true;
+        }
+      }
+      //----------------------------------------------------
+
+      //----------------------------------------------------
       //Betting Money
-      if(counting.getCount() >= minCount) {
-        bettingMoney = bettingWinMoney;
+      if(isPlaying) {
+        if(counting.getCount() >= minCount) {
+          bettingMoney = bettingWinMoney;
+        } else {
+          bettingMoney = bettingLoseMoney;
+        }
+
+        if(player.getMoney() < bettingMoney) {
+          bettingMoney = player.getMoney();
+        }
+
       } else {
-        bettingMoney = bettingWinMoney;
+        bettingMoney = 0;
       }
-
-      if(player.getMoney() < bettingMoney) {
-        bettingMoney = player.getMoney();
-      }
-
       player.betMoney(bettingMoney);
+
       //----------------------------------------------------
 
       //----------------------------------------------------

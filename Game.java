@@ -5,6 +5,7 @@
 //-----------------------------------------
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Game {
 
@@ -84,17 +85,20 @@ public class Game {
       }
       player.betMoney(bettingMoney);
 
+      System.out.println("Betting Money: " + bettingMoney);
+
       //----------------------------------------------------
 
       //----------------------------------------------------
       //Initialize the Game
+      System.out.println("Initialize the Game");
       if(dealer.getIsHit()) {
         Card card = deck.popCard();
         counting.countCard(card);
         dealerCount = dealer.dealing(card);
-        System.out.print(dealer.toString() + " ");
+        System.out.println(dealer.toString() + " ");
       }
-      System.out.print(counting.toString() + " ");
+      System.out.println(counting.toString() + " ");
 
       Card hiddenCard = deck.popCard();
 
@@ -105,7 +109,7 @@ public class Game {
         counting.countCard(card2);
         playerCount = player.playing(card1);
         playerCount = player.playing(card2); 
-        System.out.print(player.toString() + " ");
+        System.out.println(player.toString() + " ");
       }
       //----------------------------------------------------
 
@@ -180,6 +184,11 @@ public class Game {
       }
 
       if(!dealer.getIsHit() && !player.getIsHit()) {
+        System.out.println("Finish the game");
+        System.out.println(dealer.toString());
+        System.out.println(player.toString());
+        System.out.print("\n");
+
         dealer.clearHand();
         player.clearHand();
       }
@@ -217,7 +226,7 @@ public class Game {
     float money = 1000;
     float maxMoney = money;
 
-    int numGame = 10000;
+    int numGame = 100;
 
     float[] result;
 
@@ -245,7 +254,7 @@ public class Game {
 
   public static void main(String args[]) {
 
-    int numberOfStat = 500;
+    int numberOfStat = 10;
     float result[][] = new float[numberOfStat][11];
     float finalResult[][] = new float[15][5];
     float totalNumberGame = 0;
@@ -277,7 +286,7 @@ public class Game {
       }
 
       System.out.println("Result " + num);
-      System.out.println("Total Game\tPlayer Win\tDealer Win\tPush\tPlayer Winning Type:\tHigh Count:\t Dealer Bust:\t 21:\tDealer Winning Type:\t\t\tHigh Count:\tPlayer Bust:\tMoney:\tMax Money:");
+      //System.out.println("Total Game\tPlayer Win\tDealer Win\tPush\tPlayer Winning Type:\tHigh Count:\t Dealer Bust:\t 21:\tDealer Winning Type:\t\t\tHigh Count:\tPlayer Bust:\tMoney:\tMax Money:");
       
       for(int i = 0; i < numberOfStat; i++) {
         System.out.println(Integer.toString((int)result[i][0]) + "\t\t" + Integer.toString((int)result[i][1]) + "\t\t" + Integer.toString((int)result[i][2]) + "\t\t" + Integer.toString((int)result[i][3]) + "\t\t\t\t" + Integer.toString((int)result[i][4]) + "\t\t" + Integer.toString((int)result[i][5]) + "\t\t" + Integer.toString((int)result[i][6]) + "\t\t\t\t" + Integer.toString((int)result[i][7]) + "\t\t" + Integer.toString((int)result[i][8]) + "\t\t" + String.format("%.2f", result[i][9]) + "\t" + String.format("%.2f", result[i][10]));
@@ -296,7 +305,7 @@ public class Game {
       totalMaxMoney = 0;
     }
     System.out.println("Final Result");
-    System.out.println("Min Count\tAvg Game\tAvg Player Win\tAvg Dealer Win\tAvg Push\tAvg Max Money");
+    //System.out.println("Min Count\tAvg Game\tAvg Player Win\tAvg Dealer Win\tAvg Push\tAvg Max Money");
     
     for(int i = 0; i < 15; i++) {
       System.out.println(i + "\t\t" + String.format("%.8f", finalResult[i][0]) + "\t" + String.format("%.8f", finalResult[i][1]) + "\t" + String.format("%.8f", finalResult[i][2]) + "\t" + String.format("%.8f", finalResult[i][3]) + "\t" + String.format("%.8f", finalResult[i][4]));

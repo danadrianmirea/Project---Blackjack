@@ -51,6 +51,10 @@ public class Player {
     return is21;
   }
 
+  public ArrayList<Card> getHandCards() {
+    return handCards;
+  }
+
   public int playing(Card card) {
     handCards.add(card);
 

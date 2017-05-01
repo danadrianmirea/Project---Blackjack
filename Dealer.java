@@ -31,6 +31,10 @@ public class Dealer {
     return isBust;
   }
 
+  public ArrayList<Card> getHandCards() {
+    return handCards;
+  }
+
   public int dealing(Card card) {
     handCards.add(card);
 

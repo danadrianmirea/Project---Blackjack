@@ -41,7 +41,7 @@ public class Game {
     int numDealerWinWithHighCount = 0, numDealerWinWithPlayerBust = 0;
 
     int minCount = _minCount;
-    int bettingWinRate = 20, bettingLoseRate = 10;
+    int bettingWinRate = 10, bettingLoseRate = 1;
 
     float maxMoney = _maxMoney;
 
@@ -85,6 +85,7 @@ public class Game {
       }
       player.betMoney(bettingMoney);
 
+      System.out.println("Player Money: " + player.getMoney());
       System.out.println("Betting Money: " + bettingMoney);
 
       //----------------------------------------------------
@@ -149,17 +150,17 @@ public class Game {
       counting.countCard(hiddenCard);
       dealerCount = dealer.dealing(hiddenCard);
 
-      if(!player.getIsBust() && !player.getIs21()) {
+      //if(!player.getIsBust() && !player.getIs21()) {
         while(dealer.getIsHit()) {
           Card card = deck.popCard();
           counting.countCard(card);
           dealerCount = dealer.dealing(card);
         }
-      }
+      //}
       dealer.setIsHit(false);
 
-      System.out.print("Player: " + playerCount + " ");
-      System.out.print("Dealer: " + dealerCount + " ");
+      System.out.println("Player: " + playerCount + " ");
+      System.out.println("Dealer: " + dealerCount + " ");
 
       if(!player.getIs21()) {
         if(playerCount > dealerCount) {
@@ -184,16 +185,15 @@ public class Game {
       }
 
       if(!dealer.getIsHit() && !player.getIsHit()) {
-        System.out.println("Finish the game");
         System.out.println(dealer.toString());
         System.out.println(player.toString());
-        System.out.print("\n");
+        System.out.println("Finish the game");
 
         dealer.clearHand();
         player.clearHand();
       }
 
-      System.out.print("Player Money: " + player.getMoney());
+      System.out.println("Player Money: " + player.getMoney());
 
       if(player.getMoney() > maxMoney) {
         maxMoney = player.getMoney();
@@ -226,7 +226,7 @@ public class Game {
     float money = 1000;
     float maxMoney = money;
 
-    int numGame = 100;
+    int numGame = 10;
 
     float[] result;
 
@@ -254,7 +254,7 @@ public class Game {
 
   public static void main(String args[]) {
 
-    int numberOfStat = 10;
+    int numberOfStat = 100;
     float result[][] = new float[numberOfStat][11];
     float finalResult[][] = new float[15][5];
     float totalNumberGame = 0;

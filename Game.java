@@ -40,7 +40,7 @@ public class Game {
     int numDealerWinWithHighCount = 0, numDealerWinWithPlayerBust = 0;
 
     int minCount = _minCount;
-    int bettingWinRate = 10, bettingLoseRate = 100;
+    int bettingWinRate = 20, bettingLoseRate = 10;
 
     float maxMoney = _maxMoney;
 
@@ -109,17 +109,6 @@ public class Game {
       }
       //----------------------------------------------------
 
-      //----------------------------------------------------
-      // Double Method
-      /*ArrayList<Integer> dealerHand = dealer.getHand();
-      if(!(dealerHand.size() == 2 || dealerHand.get(0) == 10) && counting.getCount() >= minCount) {
-        if(player.getMoney() >= bettingMoney) {
-          bettingMoney += bettingMoney;
-          player.betMoney(bettingMoney);
-        }
-      }*/
-      //----------------------------------------------------
-
       if(player.getIs21()) {
         numPlayerWin++;
         numPlayerWinWith21++;
@@ -140,6 +129,17 @@ public class Game {
           playerCount = player.playing(card);
         }
       }
+
+      //----------------------------------------------------
+      // Double Method
+      /*ArrayList<Integer> dealerHand = dealer.getHand();
+      if(!(dealerHand.size() == 2 || dealerHand.get(0) == 10) && counting.getCount() >= minCount) {
+        if(player.getMoney() >= bettingMoney) {
+          bettingMoney += bettingMoney;
+          player.betMoney(bettingMoney);
+        }
+      }*/
+      //----------------------------------------------------
 
       //Flip the hidden dealer card
       counting.countCard(hiddenCard);

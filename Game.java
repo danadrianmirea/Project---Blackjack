@@ -210,7 +210,7 @@ public class Game {
     return new float[]{numTotalGame, numPlayerWin, numDealerWin, numPush, numPlayerWinWithHighCount, numPlayerWinWith21, numPlayerWinWithDealerBust, numDealerWinWithHighCount, numDealerWinWithPlayerBust, player.getMoney(), maxMoney};
   }
 
-  public static float[] GameState(int minCount) {
+  public static float[] GameState(String countMethod, float startingMoney, int minCount, int numGame) {
 
     int numTotalGame = 0;
     int numPlayerWin = 0;
@@ -223,15 +223,13 @@ public class Game {
     int numDealerWinWithHighCount = 0;
     int numDealerWinWithPlayerBust = 0;
 
-    float money = 1000;
+    float money = startingMoney;
     float maxMoney = money;
-
-    int numGame = 10;
 
     float[] result;
 
     for(int i = 0; i < numGame; i++) {
-      result = PlayGame("HiLo", money, maxMoney, minCount);
+      result = PlayGame(countMethod, money, maxMoney, minCount);
       numTotalGame += result[0];
       numPlayerWin += result[1];
       numDealerWin += result[2];
@@ -254,7 +252,14 @@ public class Game {
 
   public static void main(String args[]) {
 
+    //----------------------------------------------------
+    // Non-static variables
     int numberOfStat = 100;
+    int numberOfGameDeck = 100;
+    float startingMoney = 1000;
+    String countMethod = "HiLo";
+    //----------------------------------------------------
+
     float result[][] = new float[numberOfStat][11];
     float finalResult[][] = new float[15][5];
     float totalNumberGame = 0;
@@ -277,7 +282,7 @@ public class Game {
 
     for(int num = 0; num < 15; num++) {
       for(int i = 0; i < numberOfStat; i++) {
-        result[i] = GameState(num);
+        result[i] = GameState(countMethod, startingMoney, num, numberOfGameDeck);
         totalNumberGame += result[i][0];
         totalPlayerWinning += (result[i][1] / result[i][0]);
         totalDealerWinning += (result[i][2] / result[i][0]);

@@ -13,12 +13,43 @@ public class OneDeckGame {
   float money = 0;
   float maxMoney = 0;
   int minCount = 0;
+  boolean isDouble = false;
+  boolean isSplit = false;
+  boolean isFixedBetting = false;
+  float bettingFixedWinMoney = 0;
+  float bettingFixedLoseMoney = 0;
+  int bettingWinRate = 0;
+  int bettingLoseRate = 0;
 
-  public OneDeckGame(String _countingMethod, float _money, float _maxMoney, int _minCount) {
+  public OneDeckGame(String _countingMethod, float _money, float _maxMoney, int _minCount, boolean _isDouble, boolean _isSplit, boolean _isFixedBetting, float _bettingFixedWinMoney, float _bettingFixedLoseMoney,int _bettingWinRate, int _bettingLoseRate) {
+    //----------------------------------------------------
+    // Parameters
+    //
+    // Order
+    // 0      Counting Method
+    // 1      Starting Money
+    // 2      Maximum Money Player Reach
+    // 3      Minimum Count for Start Betting
+    // 4      Rule Possible for Double
+    // 5      Rule Possible for Split
+    // 6      Fixed Betting
+    // 7      Fixed Win Betting (Non-Counting Game -> WinBetting)
+    // 8      Fixed Lose Betting
+    // 9      Win Betting Rate
+    // 10     Lose Betting Rate
+    //----------------------------------------------------
+
     countingMethod = _countingMethod;
     money = _money;
     maxMoney = _maxMoney;
     minCount = _minCount;
+    isDouble = _isDouble;
+    isSplit = _isSplit;
+    isFixedBetting = _isFixedBetting;
+    bettingFixedWinMoney = _bettingFixedWinMoney;
+    bettingFixedLoseMoney = _bettingFixedLoseMoney;
+    bettingWinRate = _bettingWinRate;
+    bettingLoseRate = _bettingLoseRate;
   }
 
   public float[] PlayOneDeckGame() {
@@ -27,17 +58,17 @@ public class OneDeckGame {
     // Return values
     // 
     // Order
-    // 0      Number Of Total Game
-    // 1      Number Of Player Win
-    // 2      Number Of Dealer Win
-    // 3      Number Of Push
-    // 4      Number Of Player Win With High Count
-    // 5      Number Of Player Win With 21
-    // 6      Number Of Player Win With Dealer Bust
-    // 7      Number Of Dealer Win With High Count
-    // 8      Number Of Dealer Win With Player Bust
-    // 9      Money Of Player Left
-    // 10     Money of Player Max
+    // 0      Number Of Total Games
+    // 1      Number Of Player Wins
+    // 2      Number Of Dealer Wins
+    // 3      Number Of Pushes
+    // 4      Number Of Player Wins by High Count
+    // 5      Number Of Player Wins by 21
+    // 6      Number Of Player Wins by Dealer Bust
+    // 7      Number Of Dealer Wins by High Count
+    // 8      Number Of Dealer Wins by Player Bust
+    // 9      Remained Money
+    // 10     Maximum Money Player Reach
     //----------------------------------------------------
 
     Deck deck = new Deck(6);
@@ -50,11 +81,17 @@ public class OneDeckGame {
     int numPlayerWinWithHighCount = 0, numPlayerWinWith21 = 0, numPlayerWinWithDealerBust = 0;
     int numDealerWinWithHighCount = 0, numDealerWinWithPlayerBust = 0;
 
-    int bettingWinRate = 10, bettingLoseRate = 1;
-
     float bettingMoney = 0;
-    float bettingWinMoney = money / bettingWinRate;
-    float bettingLoseMoney = money / bettingWinRate / bettingLoseRate;
+    float bettingWinMoney = 0; 
+    float bettingLoseMoney = 0;
+
+    if(isFixedBetting) {
+      bettingWinMoney = bettingFixedWinMoney;
+      bettingLoseMoney = bettingFixedLoseMoney;
+    } else {
+      bettingWinMoney = bettingWinMoney = money / bettingWinRate;
+      bettingLoseMoney = money / bettingWinRate / bettingLoseRate;
+    }
 
     boolean isPlaying = false;
 
@@ -67,7 +104,7 @@ public class OneDeckGame {
 
       //----------------------------------------------------
       //Playing Status
-      if(!isPlaying) {
+      if(!isPlaying && counting.getIsCounting()) {
         if(counting.getCount() >= minCount) {
           isPlaying = true;
         }
@@ -76,6 +113,8 @@ public class OneDeckGame {
 
       //----------------------------------------------------
       //Betting Money
+
+      //Counting
       if(isPlaying) {
         if(counting.getCount() >= minCount) {
           bettingMoney = bettingWinMoney;
@@ -90,6 +129,12 @@ public class OneDeckGame {
       } else {
         bettingMoney = 0;
       }
+
+      //Non-Counting
+      if(!counting.getIsCounting()) {
+        bettingMoney = bettingWinMoney;
+      }
+
       player.betMoney(bettingMoney);
 
       System.out.println("Player Money: " + player.getMoney());
@@ -144,13 +189,15 @@ public class OneDeckGame {
 
       //----------------------------------------------------
       // Double Method
-      /*ArrayList<Integer> dealerHand = dealer.getHand();
-      if(!(dealerHand.size() == 2 || dealerHand.get(0) == 10) && counting.getCount() >= minCount) {
-        if(player.getMoney() >= bettingMoney) {
-          bettingMoney += bettingMoney;
-          player.betMoney(bettingMoney);
+      if (isDouble) {
+        ArrayList<Integer> dealerHand = dealer.getHand();
+        if(!(dealerHand.size() == 2 || dealerHand.get(0) == 10) && counting.getCount() >= minCount) {
+          if(player.getMoney() >= bettingMoney) {
+            bettingMoney += bettingMoney;
+            player.betMoney(bettingMoney);
+          }
         }
-      }*/
+      }
       //----------------------------------------------------
 
       //Flip the hidden dealer card

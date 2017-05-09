@@ -7,10 +7,15 @@
 public class Counting {
 
   int count;
+  boolean isCounting = false;
   String method;
 
   public Counting(int _count, String _method) {
     count = _count;
+    if(_method.equals("none"))
+      isCounting = false;
+    else
+      isCounting = true;
     method = _method;
   }
 
@@ -26,9 +31,16 @@ public class Counting {
     return method;
   }
 
+  public boolean getIsCounting() {
+    return isCounting;
+  }
+
   public void countCard(Card card) {
-    if (method.equals("HiLo"))
-      HiLo(card);
+    if(isCounting) {
+      if (method.equals("HiLo")) {
+        HiLo(card);
+      }
+    }
   }
 
   public String toString() {

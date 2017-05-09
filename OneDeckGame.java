@@ -133,6 +133,9 @@ public class OneDeckGame {
       //Non-Counting
       if(!counting.getIsCounting()) {
         bettingMoney = bettingWinMoney;
+        if(player.getMoney() < bettingMoney) {
+          bettingMoney = player.getMoney();
+        }
       }
 
       player.betMoney(bettingMoney);

@@ -9,14 +9,14 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 public class Game {
-  public static void main(String args[]) throws FileNotFoundException{
+    public static void main(String args[]) throws FileNotFoundException {
 
     //----------------------------------------------------
     // Non-static variables
-    int numberOfStat = 10;
+    int numberOfStat = 1000;
     int numberOfOneGameDeck = 100;
     float startingMoney = 1000;
-    String countMethod = "none";
+    String countMethod = "KO";
     boolean isDouble = false;
     boolean isSplit = false;
     boolean isFixedBetting = true;
@@ -76,7 +76,9 @@ public class Game {
     //
     //----------------------------------------------------
 
-    for(int num = 0; num < 15; num++) {
+    for(int num = 10; num < 11; num++) {
+        stringBuilder.append("Minimum count " + num);
+        stringBuilder.append("\n");
       for(int i = 0; i < numberOfStat; i++) {
         OneGame oneGame = new OneGame(countMethod, startingMoney, num, numberOfOneGameDeck, isDouble, isSplit, isFixedBetting, bettingFixedWinMoney, bettingFixedLostMoney, bettingWinRate, bettingLoseRate);
         result[i] = oneGame.PlayOneGame();
@@ -118,7 +120,7 @@ public class Game {
         stringBuilder.append(',');
         stringBuilder.append(String.format("%.2f", result[i][10]));
         stringBuilder.append("\n");
-      }
+    }
 
       finalResult[num][0] = (float)totalNumberGame / numberOfStat;
       finalResult[num][1] = (float)totalPlayerWinning / numberOfStat;

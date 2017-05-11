@@ -26,7 +26,7 @@ public class Game {
     int bettingLoseRate = 0;
     //----------------------------------------------------
 
-    float result[][] = new float[numberOfStat][11];
+    float result[][] = new float[numberOfStat][15];
     float finalResult[][] = new float[15][5];
     float totalNumberGame = 0;
     float totalPlayerWinning = 0;
@@ -62,6 +62,14 @@ public class Game {
     stringBuilder.append("Money");
     stringBuilder.append(',');
     stringBuilder.append("Max Money");
+    stringBuilder.append(',');
+    stringBuilder.append("Toal Win Money");
+    stringBuilder.append(',');
+    stringBuilder.append("Total Lose Money");
+    stringBuilder.append(',');
+    stringBuilder.append("Total Win with Winning Betting");
+    stringBuilder.append(',');
+    stringBuilder.append("Total Lose with Losing Betting");
     stringBuilder.append("\n");
 
     //----------------------------------------------------
@@ -119,6 +127,14 @@ public class Game {
         stringBuilder.append(String.format("%.2f", result[i][9]));
         stringBuilder.append(',');
         stringBuilder.append(String.format("%.2f", result[i][10]));
+        stringBuilder.append(',');
+        stringBuilder.append(String.format("%.2f", result[i][11]));
+        stringBuilder.append(',');
+        stringBuilder.append(String.format("%.2f", result[i][12]));
+        stringBuilder.append(',');
+        stringBuilder.append(Integer.toString((int)result[i][13]));
+        stringBuilder.append(',');
+        stringBuilder.append(Integer.toString((int)result[i][14]));
         stringBuilder.append("\n");
     }
 

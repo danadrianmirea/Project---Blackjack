@@ -20,6 +20,10 @@ public class OneDeckGame {
   float bettingFixedLoseMoney = 0;
   int bettingWinRate = 0;
   int bettingLoseRate = 0;
+  float totalWinMoney = 0;
+  float totalLoseMoney = 0;
+  int totalWinWithWinBetting = 0;
+  int totalLoseWithLoseBetting = 0;
 
   public OneDeckGame(String _countingMethod, float _money, float _maxMoney, int _minCount, boolean _isDouble, boolean _isSplit, boolean _isFixedBetting, float _bettingFixedWinMoney, float _bettingFixedLoseMoney,int _bettingWinRate, int _bettingLoseRate) {
     //----------------------------------------------------
@@ -37,6 +41,8 @@ public class OneDeckGame {
     // 8      Fixed Lose Betting
     // 9      Win Betting Rate
     // 10     Lose Betting Rate
+    // 11     Total Money Player Win
+    // 12     Total Money Player Lose
     //----------------------------------------------------
 
     countingMethod = _countingMethod;
@@ -69,6 +75,8 @@ public class OneDeckGame {
     // 8      Number Of Dealer Wins by Player Bust
     // 9      Remained Money
     // 10     Maximum Money Player Reach
+    // 11     Total Money Player Win
+    // 12     Total Money Player Lose
     //----------------------------------------------------
 
     Deck deck = new Deck(6);
@@ -93,14 +101,14 @@ public class OneDeckGame {
       bettingLoseMoney = money / bettingWinRate / bettingLoseRate;
     }
 
-    boolean isPlaying = false;
+    boolean isPlaying = true;
 
     //Shuffling
     deck.shuffleCard();
 
     System.out.println("\n");
 
-    while(deck.getDeckSize() > 12) {
+    while(deck.getDeckSize() > 14) {
 
       //----------------------------------------------------
       //Playing Status
@@ -172,16 +180,23 @@ public class OneDeckGame {
       if(player.getIs21()) {
         numPlayerWin++;
         numPlayerWinWith21++;
+        float winMoney = bettingMoney + (float)(bettingMoney * 1.5);
 
-        player.addMoney(bettingMoney + (float)(bettingMoney * 1.5));
+        player.addMoney(winMoney);
+        if (bettingMoney == bettingWinMoney) {
+          totalWinWithWinBetting++;
+        }
+        totalWinMoney += winMoney;
 
       } else {
         while(player.getIsHit()) {
           //------------------------------
           //Counting exception
-          if(counting.getCount() >= minCount) {
-            player.setIsHit(false);
-            break;
+          if(counting.getCount() >= minCount && counting.getIsCounting()) {
+            if (player.getHighestCount() > 14) {
+              player.setIsHit(false);
+              break;
+            }
           }
           //------------------------------
           Card card = deck.popCard();
@@ -207,13 +222,13 @@ public class OneDeckGame {
       counting.countCard(hiddenCard);
       dealerCount = dealer.dealing(hiddenCard);
 
-      //if(!player.getIsBust() && !player.getIs21()) {
+      if(!player.getIsBust() && !player.getIs21()) {
         while(dealer.getIsHit()) {
           Card card = deck.popCard();
           counting.countCard(card);
           dealerCount = dealer.dealing(card);
         }
-      //}
+      }
       dealer.setIsHit(false);
 
       System.out.println("Player: " + playerCount + " ");
@@ -226,13 +241,21 @@ public class OneDeckGame {
           } else {
             numPlayerWinWithHighCount++;
           }
+          totalWinMoney += bettingMoney;
           numPlayerWin++;
+          if (bettingMoney == bettingWinMoney) {
+            totalWinWithWinBetting++;
+          }
           player.addMoney(bettingMoney + bettingMoney);
         } else if(playerCount < dealerCount) {
           if(playerCount == 0) {
             numDealerWinWithPlayerBust++;
           } else {
             numDealerWinWithHighCount++;
+          }
+          totalLoseMoney += bettingMoney;
+          if (bettingMoney == bettingLoseMoney) {
+            totalLoseWithLoseBetting++;
           }
           numDealerWin++;
         } else {
@@ -261,9 +284,13 @@ public class OneDeckGame {
         break;
       }
 
+      if(player.getMoney() > 3000) {
+        break;
+      }
+
       System.out.print("\n");
     }
     System.out.println("Game Finished");
-    return new float[]{numTotalGame, numPlayerWin, numDealerWin, numPush, numPlayerWinWithHighCount, numPlayerWinWith21, numPlayerWinWithDealerBust, numDealerWinWithHighCount, numDealerWinWithPlayerBust, player.getMoney(), maxMoney};
+    return new float[]{numTotalGame, numPlayerWin, numDealerWin, numPush, numPlayerWinWithHighCount, numPlayerWinWith21, numPlayerWinWithDealerBust, numDealerWinWithHighCount, numDealerWinWithPlayerBust, player.getMoney(), maxMoney, totalWinMoney, totalLoseMoney, totalWinWithWinBetting, totalLoseWithLoseBetting};
   }
 }

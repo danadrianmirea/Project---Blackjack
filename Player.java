@@ -55,6 +55,10 @@ public class Player {
     return handCards;
   }
 
+  public int getHighestCount() {
+    return getClosestLess(getHand(), 22);
+  }
+
   public int playing(Card card) {
     handCards.add(card);
 

@@ -6,7 +6,7 @@
 
 public class OneGame {
 
-  String countMethod = "";
+  String countMethod = "none";
   float startingMoney = 0;
   int minCount = 0;
   int numGame = 0;
@@ -17,6 +17,10 @@ public class OneGame {
   float bettingFixedLoseMoney = 0;
   int bettingWinRate = 0;
   int bettingLoseRate = 0;
+  float totalWinMoney = 0;
+  float totalLoseMoney = 0;
+  int totalWinWithWinBetting = 0;
+  int totalLoseWithLoseBetting = 0;
 
   public OneGame (String _countMethod, float _startingMoney, int _minCount, int _numGame, boolean _isDouble, boolean _isSplit, boolean _isFixedBetting, float _bettingFixedWinMoney, float _bettingFixedLoseMoney, int _bettingWinRate, int _bettingLoseRate) {
     //----------------------------------------------------
@@ -65,7 +69,10 @@ public class OneGame {
     // 8      Number of Dealer Wins by Player Bust
     // 9      Remained Money
     // 10     Maximum Money Player Reach
-    //
+    // 11     Total Money Player Win
+    // 12     Total Money Player Lose
+    // 13     Total Win with Winning Betting
+    // 14     Total Lose with Losing Betting
     //----------------------------------------------------
 
     int numTotalGame = 0;
@@ -98,12 +105,20 @@ public class OneGame {
       numDealerWinWithPlayerBust += result[8];
       money = result[9];
       maxMoney = result[10];
+      totalWinMoney += result[11];
+      totalLoseMoney += result[12];
+      totalWinWithWinBetting += result[13];
+      totalLoseWithLoseBetting += result[14];
 
-      if(money < 1) {
+      if (money < 1) {
+        break;
+      }
+
+      if (money > 3000) {
         break;
       }
     }
 
-    return new float[]{numTotalGame, numPlayerWin, numDealerWin, numPush, numPlayerWinWithHighCount, numPlayerWinWith21, numPlayerWinWithDealerBust, numDealerWinWithHighCount, numDealerWinWithPlayerBust, money, maxMoney};
+    return new float[]{numTotalGame, numPlayerWin, numDealerWin, numPush, numPlayerWinWithHighCount, numPlayerWinWith21, numPlayerWinWithDealerBust, numDealerWinWithHighCount, numDealerWinWithPlayerBust, money, maxMoney, totalWinMoney, totalLoseMoney, totalWinWithWinBetting, totalLoseWithLoseBetting};
   }
 }

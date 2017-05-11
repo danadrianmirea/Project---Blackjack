@@ -16,7 +16,8 @@ public class Game {
     int numberOfStat = 1000;
     int numberOfOneGameDeck = 100;
     float startingMoney = 1000;
-    String countMethod = "KO";
+    // countMethod = none | HiLo | HiOpt1 | HiOpt2 | KO
+    String countMethod = "none";
     boolean isDouble = false;
     boolean isSplit = false;
     boolean isFixedBetting = true;

@@ -6,7 +6,7 @@
 
 public class OneGame {
 
-  String countMethod = "none";
+  String countMethod = "";
   float startingMoney = 0;
   int minCount = 0;
   int numGame = 0;
@@ -114,7 +114,7 @@ public class OneGame {
         break;
       }
 
-      if (money > 3000) {
+      if (money < 500 || money > 1500) {
         break;
       }
     }

@@ -284,7 +284,7 @@ public class OneDeckGame {
         break;
       }
 
-      if(player.getMoney() > 3000) {
+      if(player.getMoney() < 500 || player.getMoney() > 1500) {
         break;
       }
 
